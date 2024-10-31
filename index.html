@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="f1-countdown">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <base href="https://roland31x.github.io/f1-countdown/"> -->
+    <title>F1 Countdown</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+    <script src="app/controllers/countdown-controller.js"></script>
+
+    <link rel="icon" href="assets/F1-logo-small.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body ng-app="f1-countdown" class="f1font" style="background-color: rgb(50, 44, 73);">
+    <div ng-controller="CountdownController">
+
+        <div ng-if="!nextRace" class="container col-12 d-flex flex-column justify-content-center">
+            <div class="row d-flex flex-column justify-content-center">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <img style="max-height: 512px; align-self: center;" src="assets/F1-logo.png">
+                    <h1 class="text-center text-white ml-3">STAY TUNED!</h1>
+                </div>              
+            </div>
+        </div>
+
+        <div ng-if="nextRace" class="container col-12 d-flex flex-column justify-content-center">
+            <div class="row d-flex justify-content-center align-items-center">
+                <img style="max-height: 128px;" src="assets/F1-logo.png">
+                <h2 class="text-center text-white ml-3">Countdown</h2>             
+            </div>
+            <hr> 
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <h4 class="text-center text-white">Upcoming race weekend:</h4>
+                    <h2 class="text-center">
+                        <a class="hyperlink d-flex flex-row align-items-center justify-content-center" href="{{nextRace.url}}">
+                            <img class="mr-2" src="https://flagsapi.com/{{nextRace.countryCode}}/flat/48.png"> 
+                            {{nextRace.raceName}}
+                        </a>
+                    </h2>
+                </div>
+            </div>
+
+            <div ng-repeat="session in nextRace.sessions" class="row mt-3 mb-3">
+                <div ng-if="session == nextSession" class="col-md-12">
+                    <h1 class="text-center text-white"> -> {{session.name}} <-</h1>
+                    <h4 ng-if="session.underway" class="text-center text-red"> UNDERWAY </h4>
+                    <h4 ng-if="!session.underway" class="text-center text-red">{{timeLeft}}</h4>
+                    <h4 class="text-center text-white">{{session.date | localestr}}</h4>       
+                                   
+                </div>
+                <div ng-if="session != nextSession" class="col-md-12">
+                    <h3 class="text-center text-white">{{session.name}} <span ng-if="session.completed"> - FINISHED</span></h3>
+                    
+                    <h5 class="text-center text-white">{{session.date | localestr}}</h5>                                         
+                </div>
+                
+            </div>
+                
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="text-center text-white">Current time:</h4>
+                    <h2 class="text-center text-white">{{currentDate | localestr}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    
+    
+
+</body>
+</html>

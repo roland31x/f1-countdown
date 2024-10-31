@@ -1,0 +1,26 @@
+.f1font{
+    font-family: 'f1-regular', sans-serif;
+    font-size: 1.5em;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: f1-regular;
+    src: url('assets/Formula1-Regular.otf');
+}
+
+.hyperlink{
+    color: #ee0000;
+    text-decoration: none;
+}
+
+.hyperlink:hover{
+    color: #ff6262;
+    text-decoration: none;
+}
+
+.text-red{
+    color: #ee0000;
+}
