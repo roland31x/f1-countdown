@@ -12,7 +12,7 @@ app.controller('CountdownController', function($scope, $interval, $http, $filter
         'Qualifying': 60,
         'Race': 120
     }
-    $scope.currentDate = new Date(2024, 1, 5, 14, 18);
+    $scope.currentDate = new Date();
 
     $http.get('https://ergast.com/api/f1/2024.json').then(function(response) {
         $scope.races = response.data.MRData.RaceTable.Races;
@@ -194,8 +194,10 @@ app.controller('CountdownController', function($scope, $interval, $http, $filter
 
     
     $interval(function() {
-        $scope.currentDate = new Date($scope.currentDate.getTime() + 1000 * 60 * 60 * 24 * 7);
-        $scope.updateTimeRemaining();   
+        if($scope.nextRace){
+            $scope.currentDate = new Date();
+            $scope.updateTimeRemaining(); 
+        }          
     }, 1000);
 
 });
