@@ -14,7 +14,7 @@ app.controller('CountdownController', function($scope, $interval, $http, $filter
     }
     $scope.currentDate = new Date();
 
-    $http.get('https://ergast.com/api/f1/2024.json').then(function(response) {
+    $http.get('https://ergast.com/api/f1/2025.json').then(function(response) {
         $scope.races = response.data.MRData.RaceTable.Races;
 
         //console.log($scope.races);
