@@ -14,93 +14,60 @@ app.controller('CountdownController', function($scope, $interval, $http, $filter
     }
     $scope.currentDate = new Date();
 
-    $http.get('https://ergast.com/api/f1/2024.json').then(function(response) {
-        $scope.races = response.data.MRData.RaceTable.Races;
+    $scope.dat
 
-        //console.log($scope.races);
+    fetch('https://roland31x.github.io/assets/db/2025.json')
+    .then((response) => response.json())
+    .then((response) => {
+        $scope.races = response.races;
 
-        $scope.races.forEach(race => {
+        $scope.sessionLengths = {
+        fp1: 60,
+        fp2: 60,
+        fp3: 60,
+        sprint: 30,
+        sprintQualifying: 45,
+        qualifying: 60,
+        gp: 120
+        };
 
-            if(race.Circuit.Location.country == "UK") {
-                race.countryCode = "GB";
-            }
-            else if(race.Circuit.Location.country == "China") {
-                race.countryCode = "CN";
-            }
-            else if(race.Circuit.Location.country == "United States") {
-                race.countryCode = "US";
-            }
-            else{
-                $http.get('https://restcountries.com/v3.1/name/' + race.Circuit.Location.country +"?fields=cca2").then(function(response) {
-                    //console.log(response);
-                    race.countryCode = response.data[0].cca2;
-                });
-            }          
+        $scope.currentDate = new Date();
 
-            let ymd = race.date;
-            let hms = race.time;
-            race.date = $scope.getUtcDate(ymd, hms);
-
-            let sessions = [];
-
-            if(race.FirstPractice){
-                let sesh = {
-                    name: "FP1",
-                    date: $scope.getUtcDate(race.FirstPractice.date, race.FirstPractice.time)
-                }
-                sessions.push(sesh);
-            }
-
-            if(race.SecondPractice){
-                let sesh = {
-                    name: race.Sprint ? "Sprint Qualifying" : "FP2", 
-                    date: $scope.getUtcDate(race.SecondPractice.date, race.SecondPractice.time)
-                }
-                sessions.push(sesh);            
-            }
-
-            if(race.ThirdPractice){
-                let sesh = {
-                    name: "FP3", 
-                    date: $scope.getUtcDate(race.ThirdPractice.date, race.ThirdPractice.time)
-                }
-                sessions.push(sesh);
-            }
-
-            if(race.Sprint){
-                let sesh = {
-                    name: "Sprint", 
-                    date: $scope.getUtcDate(race.Sprint.date, race.Sprint.time)
-                }
-                sessions.push(sesh);
-            }
-
-            if(race.Qualifying){
-                let sesh = {
-                    name: "Qualifying", 
-                    date: $scope.getUtcDate(race.Qualifying.date, race.Qualifying.time)
-                }
-                sessions.push(sesh);
-            }
-
-
-            sessions.push({name: "Race", date: race.date});
-
-
-            sessions.forEach(session => {
-                let projectedEnd = new Date(session.date.getTime() + 60000 * $scope.sessionLengths[session.name]);
-                // console.log(session.name + ": " + session.date + " - " + projectedEnd);
-                if(projectedEnd < $scope.currentDate) {
-                    session.completed = true;
-                }
-                if(session.date < $scope.currentDate && projectedEnd > $scope.currentDate) {
-                    session.underway = true;
-                } 
+        $scope.races.forEach((race) => {
+        // Country code fetch
+        $http
+            .get(
+            'https://restcountries.com/v3.1/name/' +
+                encodeURIComponent(race.location) +
+                '?fields=cca2'
+            )
+            .then(function (response) {
+            race.countryCode = response.data[0]?.cca2 || 'UN'; // fallback
             });
 
-            race.sessions = sessions;
-            
-        })
+        // Convert sessions object to array with proper date objects
+        race.sessions = Object.entries(race.sessions).map(([name, dateStr]) => {
+            const date = new Date(dateStr);
+            const projectedEnd = new Date(
+            date.getTime() + 60000 * ($scope.sessionLengths[name] || 60)
+            );
+
+            return {
+            name,
+            date,
+            completed: projectedEnd < $scope.currentDate,
+            underway:
+                date <= $scope.currentDate && projectedEnd > $scope.currentDate
+            };
+        });
+
+        // Sort sessions by date
+        race.sessions.sort((a, b) => a.date - b.date);
+
+        // Assign the race date for comparison
+        race.date = race.sessions.find((s) => s.name === 'gp')?.date;
+        });
+
         $scope.findNextRace();
     });
 
