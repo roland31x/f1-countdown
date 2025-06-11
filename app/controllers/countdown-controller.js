@@ -1,17 +1,17 @@
 var app = angular.module('f1-countdown', []);
 
 app.controller('CountdownController', function($scope, $interval, $http, $filter) {
-
-    $scope.sessionNames = ['FirstPractice', 'SecondPractice', 'ThirdPractice', 'Sprint', 'Qualifying'];
+    
     $scope.sessionLengths = {
-        'FP1': 60,
-        'FP2': 60,
-        'FP3': 60,
-        'Sprint': 30,
-        'Sprint Qualifying': 45,
-        'Qualifying': 60,
-        'Race': 120
-    }
+        fp1: 60,
+        fp2: 60,
+        fp3: 60,
+        sprint: 30,
+        sprintQualifying: 45,
+        qualifying: 60,
+        gp: 120
+    };
+
     $scope.currentDate = new Date();
 
     $scope.dat
@@ -21,15 +21,7 @@ app.controller('CountdownController', function($scope, $interval, $http, $filter
     .then((response) => {
         $scope.races = response.races;
 
-        $scope.sessionLengths = {
-        fp1: 60,
-        fp2: 60,
-        fp3: 60,
-        sprint: 30,
-        sprintQualifying: 45,
-        qualifying: 60,
-        gp: 120
-        };
+        
 
         $scope.currentDate = new Date();
 
