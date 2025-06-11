@@ -37,17 +37,18 @@ app.controller('CountdownController', function($scope, $interval, $http, $filter
 
             // Country code fetch
 
-            
             $http
-            .get(
-            'https://restcountries.com/v3.1/name/' +
-                encodeURIComponent(race.country) +
-                '?fields=cca2'
-            )
-            .then(function (response) {
-                race.countryCode = response.data[0]?.cca2 || 'UN'; // fallback
-            })
-            .catch(function () {});
+                .get(
+                'https://restcountries.com/v3.1/name/' +
+                    encodeURIComponent(race.country) +
+                    '?fields=cca2'
+                )
+                .then(function (response) {
+                    race.countryCode = response.data[0]?.cca2 || 'UN'; // fallback
+                })
+                .catch(function () {
+                    race.countryCode = 'UN'; // fallback if country not found
+                });
             
 
             
