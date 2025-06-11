@@ -43,7 +43,7 @@
                     <h2 class="text-center">
                         <a class="hyperlink d-flex flex-row align-items-center justify-content-center" href="{{nextRace.url}}">
                             <img class="mr-2" src="https://flagsapi.com/{{nextRace.countryCode}}/flat/48.png"> 
-                            {{nextRace.raceName}}
+                            {{nextRace.name}}
                         </a>
                     </h2>
                 </div>
@@ -51,7 +51,7 @@
 
             <div ng-repeat="session in nextRace.sessions" class="row mt-3 mb-3">
                 <div ng-if="session == nextSession" class="col-md-12">
-                    <h1 class="text-center text-white"> -> {{session.name}} <-</h1>
+                    <h1 class="text-center text-white"> -> {{getSessionName(session.name)}} <-</h1>
                     <h4 ng-if="session.underway" class="text-center text-red"> UNDERWAY </h4>
                     <h4 ng-if="!session.underway" class="text-center text-red">{{timeLeft}}</h4>
                     <h4 class="text-center text-white">{{session.date | localestr}}</h4>       
