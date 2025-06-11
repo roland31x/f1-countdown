@@ -3,6 +3,7 @@
     {
       "name": "Australian",
       "location": "Melbourne",
+      "country": "Australia",
       "latitude": -37.8373,
       "longitude": 144.9666,
       "round": 1,
@@ -19,6 +20,7 @@
     {
       "name": "Chinese",
       "location": "Shanghai",
+      "country": "China",
       "latitude": 31.3807,
       "longitude": 121.2498,
       "round": 2,
@@ -35,6 +37,7 @@
     {
       "name": "Japanese",
       "location": "Suzuka",
+      "country": "Japan",
       "latitude": 35.3689,
       "longitude": 138.9256,
       "round": 3,
@@ -51,6 +54,7 @@
     {
       "name": "Bahrain",
       "location": "Sakhir",
+      "country": "Bahrain",
       "latitude": 26.037,
       "longitude": 50.5112,
       "round": 4,
@@ -67,6 +71,7 @@
     {
       "name": "Saudi Arabian",
       "location": "Jeddah",
+      "country": "Saudi Arabia",
       "latitude": 21.485811,
       "longitude": 39.192505,
       "round": 5,
@@ -83,6 +88,7 @@
     {
       "name": "Miami",
       "location": "Miami",
+      "country": "USA",
       "latitude": 25.957764,
       "longitude": -80.238835,
       "round": 6,
@@ -99,6 +105,7 @@
     {
       "name": "Emilia Romagna Grand Prix",
       "location": "Imola",
+      "country": "Italy",
       "latitude": 44.344576,
       "longitude": 11.713808,
       "round": 7,
@@ -115,6 +122,7 @@
     {
       "name": "Monaco",
       "location": "Monte Carlo",
+      "country": "Monaco",
       "latitude": 43.7338,
       "longitude": 7.4215,
       "round": 8,
@@ -131,6 +139,7 @@
     {
       "name": "Spanish",
       "location": "Catalunya",
+      "country": "Spain",
       "latitude": 41.5638,
       "longitude": 2.2585,
       "round": 9,
@@ -147,6 +156,7 @@
     {
       "name": "Canadian",
       "location": "Montreal",
+      "country": "Canada",
       "latitude": 45.5034,
       "longitude": -73.5267,
       "round": 10,
@@ -163,6 +173,7 @@
     {
       "name": "Austrian",
       "location": "Spielberg",
+      "country": "Austria",
       "latitude": 47.2225,
       "longitude": 14.7607,
       "round": 11,
@@ -179,6 +190,7 @@
     {
       "name": "British",
       "location": "Silverstone",
+      "country": "United Kingdom",
       "latitude": 52.0706,
       "longitude": -1.0174,
       "round": 12,
@@ -195,6 +207,7 @@
     {
       "name": "Belgian",
       "location": "Spa-Francorchamps",
+      "country": "Belgium",
       "latitude": 50.444,
       "longitude": 5.9687,
       "round": 13,
@@ -211,6 +224,7 @@
     {
       "name": "Hungarian",
       "location": "Budapest",
+      "country": "Hungary",
       "latitude": 47.583,
       "longitude": 19.2526,
       "round": 14,
@@ -227,6 +241,7 @@
     {
       "name": "Dutch",
       "location": "Zandvoort",
+      "country": "Netherlands",
       "latitude": 52.388408,
       "longitude": 4.547122,
       "round": 15,
@@ -243,6 +258,7 @@
     {
       "name": "Italian",
       "location": "Monza",
+      "country": "Italy",
       "latitude": 45.6169,
       "longitude": 9.2825,
       "round": 16,
@@ -259,6 +275,7 @@
     {
       "name": "Azerbaijan",
       "location": "Baku",
+      "country": "Azerbaijan",
       "latitude": 40.3699,
       "longitude": 49.8433,
       "round": 17,
@@ -275,6 +292,7 @@
     {
       "name": "Singapore",
       "location": "Singapore",
+      "country": "Singapore",
       "latitude": 1.2857,
       "longitude": 103.8575,
       "round": 18,
@@ -291,6 +309,7 @@
     {
       "name": "United States",
       "location": "Austin",
+      "country": "USA",
       "latitude": 30.1328,
       "longitude": -97.6411,
       "round": 19,
@@ -307,10 +326,11 @@
     {
       "name": "Mexican",
       "location": "Mexico City",
+      "country": "Mexico",
       "latitude": 19.4028,
       "longitude": -99.0986,
       "round": 20,
-      "slug": "mexican-grand-prix",
+      "slug": "mexico-grand-prix",
       "localeKey": "mexico-grand-prix",
       "sessions": {
         "fp1": "2025-10-24T18:30:00Z",
@@ -323,6 +343,7 @@
     {
       "name": "Brazilian",
       "location": "Sao Paulo",
+      "country": "Brazil",
       "latitude": -23.7014,
       "longitude": -46.6969,
       "round": 21,
@@ -339,6 +360,7 @@
     {
       "name": "Las Vegas",
       "location": "Las Vegas",
+      "country": "USA",
       "latitude": 36.166747,
       "longitude": -115.148708,
       "round": 22,
@@ -355,6 +377,7 @@
     {
       "name": "Qatar",
       "location": "Doha",
+      "country": "Qatar",
       "latitude": 25.490292,
       "longitude": 51.45303,
       "round": 23,
@@ -371,6 +394,7 @@
     {
       "name": "Abu Dhabi",
       "location": "Yas Marina",
+      "country": "United Arab Emirates",
       "latitude": 24.4821,
       "longitude": 54.3482,
       "round": 24,

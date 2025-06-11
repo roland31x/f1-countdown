@@ -34,24 +34,21 @@ app.controller('CountdownController', function($scope, $interval, $http, $filter
             $scope.currentDate = new Date();
 
             $scope.races.forEach((race) => {
-                
+
             // Country code fetch
 
-            $http.post('https://countriesnow.space/api/v0.1/countries/population/cities', { city: race.location })
+            
+            $http
+            .get(
+            'https://restcountries.com/v3.1/name/' +
+                encodeURIComponent(race.country) +
+                '?fields=cca2'
+            )
             .then(function (response) {
-                race.country = response.data.country;
-
-                $http
-                .get(
-                'https://restcountries.com/v3.1/name/' +
-                    encodeURIComponent(race.country) +
-                    '?fields=cca2'
-                )
-                .then(function (response) {
-                    race.countryCode = response.data[0]?.cca2 || 'UN'; // fallback
-                })
-                .catch(function () {});
-            });
+                race.countryCode = response.data[0]?.cca2 || 'UN'; // fallback
+            })
+            .catch(function () {});
+            
 
             
 
