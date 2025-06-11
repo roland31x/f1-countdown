@@ -27,56 +27,55 @@ app.controller('CountdownController', function($scope, $interval, $http, $filter
     fetch('https://roland31x.github.io/f1-countdown/assets/db/2025.json')
     .then((response) => response.json())
     .then((response) => {
-        $scope.races = response.races;
+            $scope.races = response.races;
 
-        
+            
 
-        $scope.currentDate = new Date();
+            $scope.currentDate = new Date();
 
-        $scope.races.forEach((race) => {
+            $scope.races.forEach((race) => {
+                
+            // Country code fetch
 
-
-        // Country code fetch
-
-        $http.post('https://countriesnow.space/api/v0.1/countries/population/cities', {data: { city : race.location }})
-        .then(function (response) {
-            race.country = response.data.country;
-
-            $http
-            .get(
-            'https://restcountries.com/v3.1/name/' +
-                encodeURIComponent(race.country) +
-                '?fields=cca2'
-            )
+            $http.post('https://countriesnow.space/api/v0.1/countries/population/cities', { city: race.location })
             .then(function (response) {
-                race.countryCode = response.data[0]?.cca2 || 'UN'; // fallback
-            })
-            .catch(function () {});
-        });
+                race.country = response.data.country;
 
-        
+                $http
+                .get(
+                'https://restcountries.com/v3.1/name/' +
+                    encodeURIComponent(race.country) +
+                    '?fields=cca2'
+                )
+                .then(function (response) {
+                    race.countryCode = response.data[0]?.cca2 || 'UN'; // fallback
+                })
+                .catch(function () {});
+            });
 
-        // Convert sessions object to array with proper date objects
-        race.sessions = Object.entries(race.sessions).map(([name, dateStr]) => {
-            const date = new Date(dateStr);
-            const projectedEnd = new Date(
-            date.getTime() + 60000 * ($scope.sessionLengths[name] || 60)
-            );
+            
 
-            return {
-            name,
-            date,
-            completed: projectedEnd < $scope.currentDate,
-            underway:
-                date <= $scope.currentDate && projectedEnd > $scope.currentDate
-            };
-        });
+            // Convert sessions object to array with proper date objects
+            race.sessions = Object.entries(race.sessions).map(([name, dateStr]) => {
+                const date = new Date(dateStr);
+                const projectedEnd = new Date(
+                date.getTime() + 60000 * ($scope.sessionLengths[name] || 60)
+                );
 
-        // Sort sessions by date
-        race.sessions.sort((a, b) => a.date - b.date);
+                return {
+                name,
+                date,
+                completed: projectedEnd < $scope.currentDate,
+                underway:
+                    date <= $scope.currentDate && projectedEnd > $scope.currentDate
+                };
+            });
 
-        // Assign the race date for comparison
-        race.date = race.sessions.find((s) => s.name === 'gp')?.date;
+            // Sort sessions by date
+            race.sessions.sort((a, b) => a.date - b.date);
+
+            // Assign the race date for comparison
+            race.date = race.sessions.find((s) => s.name === 'gp')?.date;
         });
 
         $scope.findNextRace();

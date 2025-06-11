@@ -58,7 +58,7 @@
                                    
                 </div>
                 <div ng-if="session != nextSession" class="col-md-12">
-                    <h3 class="text-center text-white">{{session.name}} <span ng-if="session.completed"> - FINISHED</span></h3>
+                    <h3 class="text-center text-white">{{getSessionName(session.name)}} <span ng-if="session.completed"> - FINISHED</span></h3>
                     
                     <h5 class="text-center text-white">{{session.date | localestr}}</h5>                                         
                 </div>
