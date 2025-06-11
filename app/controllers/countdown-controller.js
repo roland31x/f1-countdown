@@ -16,7 +16,7 @@ app.controller('CountdownController', function($scope, $interval, $http, $filter
 
     $scope.dat
 
-    fetch('https://roland31x.github.io/assets/db/2025.json')
+    fetch('https://roland31x.github.io/f1-countdown/assets/db/2025.json')
     .then((response) => response.json())
     .then((response) => {
         $scope.races = response.races;
