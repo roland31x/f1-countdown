@@ -1,6 +1,16 @@
 var app = angular.module('f1-countdown', []);
 
 app.controller('CountdownController', function($scope, $interval, $http, $filter) {
+
+    $scope.sessionNames = {
+        fp1: 'Free Practice 1',
+        fp2: 'Free Practice 2',
+        fp3: 'Free Practice 3',
+        sprint: 'Sprint',
+        sprintQualifying: 'Sprint Qualifying',
+        qualifying: 'Qualifying',
+        gp: 'Grand Prix'
+    }
     
     $scope.sessionLengths = {
         fp1: 60,
@@ -13,8 +23,6 @@ app.controller('CountdownController', function($scope, $interval, $http, $filter
     };
 
     $scope.currentDate = new Date();
-
-    $scope.dat
 
     fetch('https://roland31x.github.io/f1-countdown/assets/db/2025.json')
     .then((response) => response.json())
@@ -34,8 +42,9 @@ app.controller('CountdownController', function($scope, $interval, $http, $filter
                 '?fields=cca2'
             )
             .then(function (response) {
-            race.countryCode = response.data[0]?.cca2 || 'UN'; // fallback
-            });
+                race.countryCode = response.data[0]?.cca2 || 'UN'; // fallback
+            })
+            .catch(function () {});
 
         // Convert sessions object to array with proper date objects
         race.sessions = Object.entries(race.sessions).map(([name, dateStr]) => {
@@ -62,6 +71,10 @@ app.controller('CountdownController', function($scope, $interval, $http, $filter
 
         $scope.findNextRace();
     });
+
+    $scope.getSessionName = function(session) {
+        return $scope.sessionNames[session] || session.charAt(0).toUpperCase() + session.slice(1);
+    }
 
     $scope.getUtcDate = function(date, time) {
         let year = date.split('-')[0];
